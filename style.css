@@ -22,13 +22,20 @@ button {
     min-height: 100vh;
 }
 
-.container {
+.container,
+.pixels {
     background-color: hsl(56, 38%, 58%);
     padding: 1rem;
     border: 1px solid hsl(39, 77%, 83%);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-    width: 800px;
+    width: fit-content;
     height: fit-content;
+    position: relative;
+}
+
+.pixels {
+    position: absolute;
+    z-index: 100;
 }
 
 .grid {
@@ -42,24 +49,14 @@ button {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) inset;
-    background-color: hsl(56, 38%, 70%);
-}
-
-
-
-.smallboard {
-    display: grid;
-    grid-template-columns: repeat(32, 1fr);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) inset;
     background-color: hsl(56, 38%, 70%);
 }
 
 .grid {
-    border: 0.01px solid hsl(39, 77%, 83%);
+    border: 0.001px solid hsla(39, 77%, 83%, 0.616);
     transition: background-color 0.3s ease-in-out;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .control {
@@ -85,15 +82,18 @@ button {
 .black_pen {
     margin: 0.3rem;
 }
-.white_pen{
+
+.black_pen {
     background-color: #333;
     color: #f8f8ff;
 }
-.black_pen{
+
+.white_pen {
     background-color: #f8f8ff;
     columns: #333;
 }
-.visibility{
+
+.visibility {
     display: none;
     visibility: hidden;
 }
