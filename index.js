@@ -2,6 +2,7 @@ const container = document.getElementById('container');
 
 let pixel_numbers = 16;
 let color = [ 'darkseagreen', 'hsl(56, 38%, 70%)', 'teal', 'lightseagreen', 'dimgray', 'darkslategray' ];
+let penColor = `#333`;
 
 let change = false;
 
@@ -27,6 +28,7 @@ erase.innerText = 'Erase / Delete';
 board.classList.add('board');
 smallboard.classList.add('smallboard');
 control_section.classList.add('control');
+pen.classList.add('pen');
 
 control_section.appendChild(board_theme);
 control_section.appendChild(pen);
@@ -67,26 +69,67 @@ for (let i = 0; i < 32; i++)
 container.appendChild(board);
 container.appendChild(control_section);
 
-//................ Drawing functionality ............................
-// -> change the color of board by user/ designer
+//................ Drawing functionality .....................................................................
+// -> change the color of board by user/ designer ..............................................
 let theme = (e) =>
 {
     e.preventDefault();
     const randomNumber = Math.floor(Math.random() * color.length);
-    let grids = document.querySelectorAll('.grid');
-    grids.forEach(grid =>
-    {
-        grid.style.backgroundColor = color[ randomNumber ];
-    });
+    board.style.backgroundColor = color[ randomNumber ];
+    smallboard.style.backgroundColor = color[ randomNumber ];
 }
 
 board_theme.addEventListener('click', theme);
 
-// -> choose the color of the pen
+// -> choose the color of the pen ..........................................................
+let pen_choice = document.createElement('div');
+let black_pen = document.createElement('button');
+let white_pen = document.createElement('button');
 
-// -> rainbow pen
+pen_choice.classList.add('pen_choice');
+pen_choice.classList.add('visibility');
+white_pen.classList.add('white_pen');
+white_pen.innerText = 'White';
+black_pen.classList.add('black_pen');
+black_pen.innerText = 'Black';
 
-// -> resize the boarder
+pen_choice.appendChild(white_pen);
+pen_choice.appendChild(black_pen);
+
+control_section.appendChild(pen_choice);
+
+//toggle visibility function
+pen.addEventListener('click', () =>
+{
+    pen_choice.classList.toggle('visibility');
+});
+white_pen.addEventListener('click', () =>
+{
+    penColor = `#f8f8ff`;
+
+    pen_choice.classList.toggle('visibility');
+});
+black_pen.addEventListener('click', () =>
+{
+    penColor = `#333`;
+    pen_choice.classList.toggle('visibility');
+});
+
+let grids = document.querySelectorAll('.grid');
+
+grids.forEach(grid => 
+{
+    grid.addEventListener('dragover', () => 
+    {
+        grid.style.backgroundColor = penColor
+    });
+});
+
+
+
+// -> rainbow pen ...............................................................................................
+
+// -> resize the boarder .........................................................................................
 let changeSize = (e) =>
 {
     change = !change;
@@ -111,5 +154,5 @@ let changeSize = (e) =>
 }
 resize.addEventListener('click', changeSize);
 
-// -> reset/ erase everything writen on the board
-// -> erase on the board
+// -> reset/ erase everything written on the board .......................................................
+// -> erase on the board .................................................................................
