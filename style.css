@@ -23,13 +23,18 @@ button {
 }
 
 .container {
-    background-color:hsl(56, 38%, 58%);
+    background-color: hsl(56, 38%, 58%);
     padding: 1rem;
     border: 1px solid hsl(39, 77%, 83%);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    width: 800px;
+    height: fit-content;
 }
 
-.grid,
+.grid {
+    padding: 1rem;
+}
+
 .board {
     padding: 1rem;
     display: block;
@@ -38,6 +43,15 @@ button {
 .board {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) inset;
+    background-color: hsl(56, 38%, 70%);
+}
+
+
+
+.smallboard {
+    display: grid;
+    grid-template-columns: repeat(32, 1fr);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) inset;
     background-color: hsl(56, 38%, 70%);
 }
