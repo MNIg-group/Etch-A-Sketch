@@ -119,7 +119,11 @@ let grids = document.querySelectorAll('.grid');
 
 grids.forEach(grid => 
 {
-    grid.addEventListener('dragover', () => 
+    grid.addEventListener('dragover', () =>  
+    {
+        grid.style.backgroundColor = penColor
+    });
+    grid.addEventListener('mousedown', () =>  
     {
         grid.style.backgroundColor = penColor
     });
@@ -130,7 +134,7 @@ grids.forEach(grid =>
 // -> rainbow pen ...............................................................................................
 
 // -> resize the boarder .........................................................................................
-let changeSize = (e) =>
+let changeSize = () =>
 {
     change = !change;
 
@@ -138,16 +142,114 @@ let changeSize = (e) =>
     if (change === true)
     {
 
-        e.preventDefault();
         container.removeChild(board);
         container.appendChild(smallboard);
+
+        // -> choose the color of the pen ..........................................................
+        let pen_choice = document.createElement('div');
+        let black_pen = document.createElement('button');
+        let white_pen = document.createElement('button');
+
+        pen_choice.classList.add('pen_choice');
+        pen_choice.classList.add('visibility');
+        white_pen.classList.add('white_pen');
+        white_pen.innerText = 'White';
+        black_pen.classList.add('black_pen');
+        black_pen.innerText = 'Black';
+
+        pen_choice.appendChild(white_pen);
+        pen_choice.appendChild(black_pen);
+
+        control_section.appendChild(pen_choice);
+
+        //toggle visibility function
+        pen.addEventListener('click', () =>
+        {
+            pen_choice.classList.toggle('visibility');
+        });
+        white_pen.addEventListener('click', () =>
+        {
+            penColor = `#f8f8ff`;
+
+            pen_choice.classList.toggle('visibility');
+        });
+        black_pen.addEventListener('click', () =>
+        {
+            penColor = `#333`;
+            pen_choice.classList.toggle('visibility');
+        });
+
+        let grids = document.querySelectorAll('.grid');
+
+        grids.forEach(grid => 
+        {
+            grid.addEventListener('dragover', () =>  
+            {
+                grid.style.backgroundColor = penColor
+            });
+            grid.addEventListener('mousedown', () =>  
+            {
+                grid.style.backgroundColor = penColor
+            });
+        });
+
+
         container.appendChild(control_section);
     } else
     {
-
-        e.preventDefault();
         container.removeChild(smallboard);
         container.appendChild(board);
+
+
+        // -> choose the color of the pen ..........................................................
+        let pen_choice = document.createElement('div');
+        let black_pen = document.createElement('button');
+        let white_pen = document.createElement('button');
+
+        pen_choice.classList.add('pen_choice');
+        pen_choice.classList.add('visibility');
+        white_pen.classList.add('white_pen');
+        white_pen.innerText = 'White';
+        black_pen.classList.add('black_pen');
+        black_pen.innerText = 'Black';
+
+        pen_choice.appendChild(white_pen);
+        pen_choice.appendChild(black_pen);
+
+        control_section.appendChild(pen_choice);
+
+        //toggle visibility function
+        pen.addEventListener('click', () =>
+        {
+            pen_choice.classList.toggle('visibility');
+        });
+        white_pen.addEventListener('click', () =>
+        {
+            penColor = `#f8f8ff`;
+
+            pen_choice.classList.toggle('visibility');
+        });
+        black_pen.addEventListener('click', () =>
+        {
+            penColor = `#333`;
+            pen_choice.classList.toggle('visibility');
+        });
+
+        let grids = document.querySelectorAll('.grid');
+
+        grids.forEach(grid => 
+        {
+            grid.addEventListener('dragover', () =>  
+            {
+                grid.style.backgroundColor = penColor
+            });
+            grid.addEventListener('mousedown', () =>  
+            {
+                grid.style.backgroundColor = penColor
+            });
+        });
+
+
         container.appendChild(control_section);
     }
 

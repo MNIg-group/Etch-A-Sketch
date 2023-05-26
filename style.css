@@ -57,8 +57,9 @@ button {
 }
 
 .grid {
-    border: 0.1px solid hsl(39, 77%, 83%);
+    border: 0.01px solid hsl(39, 77%, 83%);
     transition: background-color 0.3s ease-in-out;
+    border-radius: 5px;
 }
 
 .control {
