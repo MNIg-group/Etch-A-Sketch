@@ -4,6 +4,8 @@ const pixels_input = document.getElementById('pixels');
 const helpInfo = document.getElementById('helpInfo');
 const helpInfoButton = document.getElementById('helpInfoButton');
 
+const rainbowColor = [ 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet' ];
+
 form.onsubmit = (e) =>
 {
     e.preventDefault();
@@ -173,6 +175,22 @@ form.onsubmit = (e) =>
 
             // -> rainbow pen ...............................................................................................
 
+            rainbow_pen.addEventListener('click', (e) =>
+            {
+                e.preventDefault();
+                let grids = document.querySelectorAll('.grid');
+
+                grids.forEach(grid =>
+                {
+                    grid.addEventListener('dragover', () =>
+                    {
+
+                        let randomRainbow = Math.floor(Math.random() * rainbowColor.length);
+                        grid.style.backgroundColor = rainbowColor[randomRainbow];
+                    });
+                });
+            })
+
             // -> Add new Board functionality .........................................................................................
 
             newBoard.addEventListener('click', () =>
@@ -181,22 +199,25 @@ form.onsubmit = (e) =>
                 container.classList.toggle('visibility');
             })
             // -> reset/ erase everything written on the board .......................................................
-            reset.addEventListener('click', () =>
+            reset.addEventListener('click', (e) =>
             {
+                e.preventDefault();
                 let grids = document.querySelectorAll('.grid');
                 grids.forEach(grid => grid.style.backgroundColor = `transparent`);
             });
             // -> help .................................................................................
-            help.addEventListener('click', () =>
+            help.addEventListener('click', (e) =>
             {
+                e.preventDefault();
                 helpInfo.style = ` z-index: 100;`
                 helpInfo.classList.toggle('visible');
                 helpInfo.classList.toggle('position');
                 helpInfo.classList.toggle('changePosition');
             });
 
-            helpInfoButton.addEventListener('click', () =>
+            helpInfoButton.addEventListener('click', (e) =>
             {
+                e.preventDefault();
                 helpInfo.classList.toggle('visible');
                 helpInfo.classList.toggle('position');
                 helpInfo.classList.toggle('changePosition');
