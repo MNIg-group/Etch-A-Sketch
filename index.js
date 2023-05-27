@@ -1,6 +1,8 @@
 const form = document.getElementById('form');
 const container = document.getElementById('container');
 const pixels_input = document.getElementById('pixels');
+const helpInfo = document.getElementById('helpInfo');
+const helpInfoButton = document.getElementById('helpInfoButton');
 
 form.onsubmit = (e) =>
 {
@@ -28,7 +30,7 @@ form.onsubmit = (e) =>
             let rainbow_pen = document.createElement('button');
             let newBoard = document.createElement('button');
             let reset = document.createElement('button');
-            let erase = document.createElement('button');
+            let help = document.createElement('button');
 
 
             board_theme.innerText = 'New theme';
@@ -36,7 +38,7 @@ form.onsubmit = (e) =>
             rainbow_pen.innerText = 'Rainbow Pen';
             newBoard.innerText = 'Add Board';
             reset.innerText = 'Reset';
-            erase.innerText = 'Erase / Delete';
+            help.innerText = 'Help';
 
             board.classList.add('board');
             control_section.classList.add('control');
@@ -47,7 +49,7 @@ form.onsubmit = (e) =>
             control_section.appendChild(rainbow_pen);
             control_section.appendChild(newBoard);
             control_section.appendChild(reset);
-            control_section.appendChild(erase);
+            control_section.appendChild(help);
 
 
 
@@ -111,8 +113,6 @@ form.onsubmit = (e) =>
                 e.preventDefault();
                 const randomNumber = Math.floor(Math.random() * color.length);
                 board.style.backgroundColor = color[ randomNumber ];
-
-                localStorage.setItem('color', color[ randomNumber ]);
             }
 
             board_theme.addEventListener('click', theme);
@@ -163,13 +163,17 @@ form.onsubmit = (e) =>
                 {
                     grid.style.backgroundColor = penColor
                 });
+                grid.addEventListener('click', () =>  
+                {
+                    grid.style.backgroundColor = penColor;
+                });
             });
 
 
 
             // -> rainbow pen ...............................................................................................
 
-            // -> newBoard the boarder .........................................................................................
+            // -> Add new Board functionality .........................................................................................
 
             newBoard.addEventListener('click', () =>
             {
@@ -179,10 +183,24 @@ form.onsubmit = (e) =>
             // -> reset/ erase everything written on the board .......................................................
             reset.addEventListener('click', () =>
             {
-            let color = localStorage.getItem('color');
-            console.log(color);
+                let grids = document.querySelectorAll('.grid');
+                grids.forEach(grid => grid.style.backgroundColor = `transparent`);
+            });
+            // -> help .................................................................................
+            help.addEventListener('click', () =>
+            {
+                helpInfo.style = ` z-index: 100;`
+                helpInfo.classList.toggle('visible');
+                helpInfo.classList.toggle('position');
+                helpInfo.classList.toggle('changePosition');
+            });
+
+            helpInfoButton.addEventListener('click', () =>
+            {
+                helpInfo.classList.toggle('visible');
+                helpInfo.classList.toggle('position');
+                helpInfo.classList.toggle('changePosition');
             })
-            // -> erase on the board .................................................................................
 
         }
 }
